@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0e2a2f;
+  --foreground: #f5f5f7;
+  --accent: #ff3e42;
+  --accent-hover: #ff5c60;
+  --accent-glow: rgba(255, 62, 66, 0.5);
+  --card: #162e33;
+  --card-hover: #1a3b41;
+  --card-foreground: #f5f5f7;
+  --border: #203e44;
+  --input: #162e33;
+  --ring: #ff3e42;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .valorant-button {
+    @apply bg-accent text-white px-6 py-3 font-bold uppercase tracking-wider
+    hover:bg-accent-hover transition-colors duration-300
+    relative overflow-hidden inline-flex items-center justify-center;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+  
+  .valorant-card {
+    @apply bg-card p-6 transition-all duration-300 hover:bg-card-hover relative overflow-hidden;
+    clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  }
+  
+  .valorant-input {
+    @apply bg-input border border-border px-4 py-2 outline-none 
+    focus:ring-2 focus:ring-opacity-50 focus:ring-accent focus:border-accent
+    transition-all duration-300;
+  }
+  
+  .diagonal-divider {
+    position: relative;
+  }
+  
+  .diagonal-divider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: var(--border);
+    transform: skewX(-15deg);
+    z-index: 1;
+  }
+  
+  .chat-bubble {
+    @apply bg-card p-4 rounded-md rounded-tl-none my-2 max-w-[80%];
+  }
+  
+  .chat-bubble-user {
+    @apply bg-accent bg-opacity-20 ml-auto rounded-tr-none;
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  /* Cyber Card Styles */
+  .cyber-container {
+    @apply relative w-[400px] h-[500px] transition-all duration-200;
+  }
+
+  .cyber-canvas {
+    @apply inset-0 z-[200] absolute grid grid-cols-5 grid-rows-5 gap-0;
+    perspective: theme('perspective.800');
+  }
+
+  .cyber-card {
+    @apply absolute inset-0 z-0 flex justify-center items-center rounded-[20px] transition-all duration-700;
+    background: linear-gradient(45deg, #1a1a1a, #262626);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .cyber-card-content {
+    @apply relative w-full h-full overflow-hidden;
+  }
+
+  .cyber-card-glare {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 45%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 55%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .cyber-lines span {
+    @apply absolute;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(92, 103, 255, 0.2),
+      transparent
+    );
+  }
+
+  .cyber-corner span {
+    @apply absolute w-[15px] h-[15px] border-2 border-[rgba(92,103,255,0.3)] transition-all duration-300;
+  }
+
+  .cyber-scan-line {
+    @apply absolute inset-0 -translate-y-full;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(92, 103, 255, 0.1),
+      transparent
+    );
+    animation: scanMove 2s linear infinite;
+  }
+
+  @keyframes scanMove {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  .cyber-card:hover .cyber-card-glare {
+    @apply opacity-100;
+  }
+
+  .cyber-card:hover .cyber-corner span {
+    @apply border-[rgba(92,103,255,0.8)];
+    box-shadow: 0 0 10px rgba(92, 103, 255, 0.5);
+  }
+
+  /* New Ethereum Card Styles */
+  .card {
+    @apply w-[195px] h-[285px] bg-[#313131] rounded-[20px] flex flex-col items-center justify-center text-white transition-all duration-200 relative cursor-pointer;
+  }
+
+  .img {
+    @apply h-[60%] absolute transition-all duration-200 z-[1];
+  }
+
+  .textBox {
+    @apply opacity-0 flex flex-col items-start justify-end w-full h-full p-4 z-[5] transition-all duration-200;
+  }
+
+  .textBox > .head {
+    @apply text-base font-bold;
+  }
+
+  .textBox > .price {
+    @apply text-base font-bold;
+  }
+
+  .textBox > .discription {
+    @apply text-sm text-gray-300 font-light;
+  }
+
+  .card:hover > .textBox {
+    @apply opacity-100;
+    gap: 0.5em;
+  }
+
+  .card:hover > .img {
+    @apply blur-[3px];
+    animation: anim 3s infinite ease-in-out;
+  }
+
+  @keyframes anim {
+    50% {
+      transform: translateY(-10%) rotate(5deg);
+    }
+  }
+
+  .card:hover {
+    transform: scale(1.04);
+  }
+}
